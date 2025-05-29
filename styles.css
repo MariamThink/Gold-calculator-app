@@ -3,6 +3,8 @@
     --secondary-color: #daa520;
     --background-color: #f8f8f8;
     --text-color: #333;
+    --success-color: #28a745;
+    --error-color: #dc3545;
 }
 
 * {
@@ -59,14 +61,27 @@ h1 {
     text-align: center;
 }
 
-#paypal-button-container {
-    margin: 15px auto;
-    max-width: 300px;
+/* Success/Cancel Message Styles */
+.success-message, .cancel-message {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: 50px;
+}
+
+.success-message h1 {
+    color: var(--success-color);
+}
+
+.cancel-message h1 {
+    color: var(--error-color);
 }
 
 /* Calculator Section Styles */
 .calculator-section {
-    display: none; /* Hidden by default */
+    display: none;
 }
 
 .mode-selection {
@@ -174,6 +189,12 @@ input {
 .payment-message.error {
     background-color: #f8d7da;
     color: #721c24;
+}
+
+/* PayPal Button Container */
+form[action*="paypal"] {
+    text-align: center;
+    margin: 20px 0;
 }
 
 @media (max-width: 480px) {

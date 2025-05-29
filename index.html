@@ -6,8 +6,6 @@
     <title>حاسبة الذهب</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <!-- Add PayPal SDK with all required parameters -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AbkEfH4PAgvVxLeuys8vq7_94Ms1ygUorQSAOdMTgcZjVsugi7baqHBDoctJLhAMGzZKAEYVKip4HIJj&currency=AED&intent=capture&enable-funding=card"></script>
 </head>
 <body>
     <div class="container">
@@ -16,11 +14,26 @@
             <h1>حاسبة الذهب</h1>
             <h2>احصل على النسخة الكاملة</h2>
             <p class="price">10 درهم إماراتي</p>
-            <div class="payment-buttons">
-                <!-- PayPal Buttons Container -->
-                <div id="paypal-button-container"></div>
-                <p class="payment-note">اختر طريقة الدفع المناسبة</p>
-            </div>
+            
+            <!-- PayPal Basic Integration -->
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="Mariamthink@gmail.com">
+                <input type="hidden" name="lc" value="AE">
+                <input type="hidden" name="item_name" value="حاسبة الذهب - النسخة الكاملة">
+                <input type="hidden" name="amount" value="10.00">
+                <input type="hidden" name="currency_code" value="AED">
+                <input type="hidden" name="button_subtype" value="services">
+                <input type="hidden" name="no_note" value="0">
+                <input type="hidden" name="tax_rate" value="0.000">
+                <input type="hidden" name="shipping" value="0.00">
+                <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHostedGuest">
+                <input type="hidden" name="return" value="https://mariamthink.github.io/Gold-calculator-app/success.html">
+                <input type="hidden" name="cancel_return" value="https://mariamthink.github.io/Gold-calculator-app/cancel.html">
+                <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/buy-logo-large.png" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            </form>
+            
+            <p class="payment-note">اختر طريقة الدفع المناسبة عند الانتقال إلى PayPal</p>
             <div id="payment-message" class="payment-message"></div>
         </div>
 
@@ -69,47 +82,6 @@
             document.getElementById('payment-section').style.display = 'none';
             document.getElementById('calculator-section').style.display = 'block';
         }
-
-        // Wait for PayPal SDK to load
-        window.paypal.Buttons({
-            // Set up the transaction
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: '10.00',
-                            currency_code: 'AED'
-                        },
-                        description: 'حاسبة الذهب - النسخة الكاملة'
-                    }]
-                });
-            },
-
-            // Finalize the transaction
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(orderData) {
-                    // Show success message
-                    const message = document.getElementById('payment-message');
-                    message.innerHTML = 'تم الدفع بنجاح! شكراً لك';
-                    message.className = 'payment-message success';
-                    
-                    // Store payment status
-                    localStorage.setItem('goldCalculatorPaid', 'true');
-                    
-                    // Hide payment section and show calculator
-                    document.getElementById('payment-section').style.display = 'none';
-                    document.getElementById('calculator-section').style.display = 'block';
-                });
-            },
-
-            // Handle errors
-            onError: function(err) {
-                console.error('PayPal Error:', err);
-                const message = document.getElementById('payment-message');
-                message.innerHTML = 'حدث خطأ في عملية الدفع. الرجاء المحاولة مرة أخرى.';
-                message.className = 'payment-message error';
-            }
-        }).render('#paypal-button-container');
     </script>
     <script src="script.js"></script>
 </body>

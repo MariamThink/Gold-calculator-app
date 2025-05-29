@@ -10,10 +10,15 @@
     <div class="container">
         <div class="success-message">
             <h1>تم الدفع بنجاح!</h1>
-            <p>شكراً لك على شراء حاسبة الذهب</p>
-            <p>يمكنك الآن استخدام جميع مميزات التطبيق</p>
-            <a href="index.html" class="button">العودة للتطبيق</a>
+            <p>شكراً لك. سيتم تحويلك تلقائياً إلى الحاسبة...</p>
         </div>
     </div>
+    <script>
+        // Store payment status and redirect
+        localStorage.setItem('goldCalculatorPaid', 'true');
+        setTimeout(function() {
+            window.location.href = 'https://mariamthink.github.io/Gold-calculator-app/';
+        }, 2000);
+    </script>
 </body>
 </html>

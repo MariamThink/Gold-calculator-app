@@ -10,9 +10,14 @@
     <div class="container">
         <div class="cancel-message">
             <h1>تم إلغاء عملية الدفع</h1>
-            <p>لم يتم اكتمال عملية الدفع. يمكنك المحاولة مرة أخرى</p>
-            <a href="index.html" class="button">العودة للتطبيق</a>
+            <p>لم يتم اكتمال عملية الدفع. سيتم تحويلك تلقائياً للمحاولة مرة أخرى...</p>
         </div>
     </div>
+    <script>
+        // Redirect back to main page after 2 seconds
+        setTimeout(function() {
+            window.location.href = 'https://mariamthink.github.io/Gold-calculator-app/';
+        }, 2000);
+    </script>
 </body>
 </html>
