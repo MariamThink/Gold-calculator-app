@@ -7,14 +7,10 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#b8860b">
-    <script>
-        // Check if user has paid
-        window.onload = function() {
-            if (localStorage.getItem('goldCalculatorPaid') !== 'true') {
-                window.location.href = 'index.html';
-            }
-        }
-    </script>
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="حاسبة الذهب">
 </head>
 <body>
     <div class="container">
@@ -68,12 +64,17 @@
     </div>
 
     <script>
+        // Check if user has paid
+        if (localStorage.getItem('goldCalculatorPaid') !== 'true') {
+            window.location.href = 'index.html';
+        }
+
         // Register service worker for offline functionality
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
+                navigator.serviceWorker.register('sw.js', { scope: '/Gold-calculator-app/' })
                     .then(registration => {
-                        console.log('ServiceWorker registered');
+                        console.log('ServiceWorker registration successful');
                     })
                     .catch(err => {
                         console.log('ServiceWorker registration failed: ', err);
@@ -82,13 +83,18 @@
         }
 
         // Handle offline/online status
-        window.addEventListener('online', function() {
-            document.getElementById('offlineStatus').style.display = 'none';
-        });
+        function updateOnlineStatus() {
+            const offlineStatus = document.getElementById('offlineStatus');
+            if (navigator.onLine) {
+                offlineStatus.style.display = 'none';
+            } else {
+                offlineStatus.style.display = 'block';
+            }
+        }
 
-        window.addEventListener('offline', function() {
-            document.getElementById('offlineStatus').style.display = 'block';
-        });
+        window.addEventListener('online', updateOnlineStatus);
+        window.addEventListener('offline', updateOnlineStatus);
+        updateOnlineStatus(); // Initial check
 
         // Handle PWA installation
         let deferredPrompt;

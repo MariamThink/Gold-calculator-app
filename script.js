@@ -22,12 +22,9 @@ function setMode(mode) {
     resultsDiv.classList.add('hidden');
 }
 
-// Format number to Arabic locale
+// Format number to show in English numerals without currency
 function formatNumber(number) {
-    return number.toLocaleString('ar-SA', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-    });
+    return number.toFixed(2);
 }
 
 // Handle form submission and calculations
@@ -65,9 +62,9 @@ function calculateSellMode(weight, currentPrice, offeredPrice) {
     }
     
     resultDetails.innerHTML = `
-        <p>القيمة الفعلية للذهب: ${formatNumber(actualValue)} ريال</p>
-        <p>السعر المعروض: ${formatNumber(offeredPrice)} ريال</p>
-        <p>الفرق: ${formatNumber(Math.abs(difference))} ريال</p>
+        <p>القيمة الفعلية للذهب: ${formatNumber(actualValue)}</p>
+        <p>السعر المعروض: ${formatNumber(offeredPrice)}</p>
+        <p>الفرق: ${formatNumber(Math.abs(difference))}</p>
     `;
     
     recommendation.className = `recommendation ${recommendationClass}`;
@@ -94,10 +91,10 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
     }
     
     resultDetails.innerHTML = `
-        <p>سعر الذهب بدون الضريبة: ${formatNumber(actualPrice)} ريال</p>
-        <p>سعر الذهب مع الضريبة (5٪): ${formatNumber(priceWithTax)} ريال</p>
-        <p>ربح البائع: ${formatNumber(buyerProfit)} ريال</p>
-        <p>سعر التصنيع للجرام: ${formatNumber(manufacturingPrice)} ريال</p>
+        <p>سعر الذهب بدون الضريبة: ${formatNumber(actualPrice)}</p>
+        <p>سعر الذهب مع الضريبة (5٪): ${formatNumber(priceWithTax)}</p>
+        <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
+        <p>سعر التصنيع للجرام: ${formatNumber(manufacturingPrice)}</p>
     `;
     
     recommendation.className = `recommendation ${recommendationClass}`;
