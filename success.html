@@ -5,10 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تم الدفع بنجاح - حاسبة الذهب</title>
     <link rel="stylesheet" href="styles.css">
-    <meta http-equiv="refresh" content="0;url=calculator.html">
     <script>
+        // Store payment status
+        localStorage.setItem('goldCalculatorPaid', 'true');
+        // Redirect to calculator
         window.location.href = 'calculator.html';
     </script>
+    <meta http-equiv="refresh" content="0;url=calculator.html">
 </head>
 <body>
     <div class="container">
