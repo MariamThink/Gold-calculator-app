@@ -44,12 +44,14 @@ body {
     color: white;
     font-size: 20px;
     font-weight: bold;
+    order: 2;
 }
 
 .divider {
     width: 2px;
     height: 30px;
     background-color: white;
+    order: 1;
 }
 
 .instagram-section {
@@ -58,11 +60,17 @@ body {
     gap: 10px;
     color: white;
     font-size: 20px;
+    order: 0;
+}
+
+.instagram-section span {
+    font-family: "Helvetica Neue", Arial, sans-serif;
 }
 
 .instagram-section img {
     width: 32px;
     height: 32px;
+    order: 2;
 }
 
 /* Main Container */
@@ -157,6 +165,18 @@ h2 {
     text-decoration: none;
     color: white;
     display: block;
+}
+
+.social-banner .logo-text {
+    order: 2;
+}
+
+.social-banner .instagram-section {
+    order: 0;
+}
+
+.social-banner .divider {
+    order: 1;
 }
 
 @media (max-width: 480px) {
