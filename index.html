@@ -11,55 +11,65 @@
     <div class="container">
         <!-- Payment Section -->
         <div id="payment-section" class="payment-section">
+            <h1>حاسبة الذهب</h1>
             <h2>احصل على النسخة الكاملة</h2>
-            <p class="price">9.99 درهم إماراتي</p>
+            <p class="price">10 درهم إماراتي</p>
             <div class="payment-buttons">
                 <!-- PayPal Button with Card Payment Option -->
                 <div id="paypal-button-container"></div>
-                <p class="payment-note">يمكنك الدفع بالبطاقة مباشرة بدون حساب PayPal</p>
+                <p class="payment-note">يمكنك الدفع بالبطاقة مباشرة من خلال PayPal</p>
             </div>
             <div id="payment-message" class="payment-message"></div>
         </div>
 
-        <h1>حاسبة الذهب</h1>
-        
-        <!-- Mode Selection -->
-        <div class="mode-selection">
-            <button id="buyMode" class="mode-btn">شراء الذهب</button>
-            <button id="sellMode" class="mode-btn">بيع الذهب</button>
-        </div>
-
-        <!-- Main Form -->
-        <form id="goldForm" class="hidden">
-            <div class="input-group">
-                <label for="weight">الوزن بالجرام:</label>
-                <input type="number" id="weight" required step="0.01">
+        <!-- Calculator Section - Hidden by default -->
+        <div id="calculator-section" class="calculator-section" style="display: none;">
+            <h1>حاسبة الذهب</h1>
+            
+            <!-- Mode Selection -->
+            <div class="mode-selection">
+                <button id="buyMode" class="mode-btn">شراء الذهب</button>
+                <button id="sellMode" class="mode-btn">بيع الذهب</button>
             </div>
 
-            <div class="input-group">
-                <label for="currentPrice">سعر الجرام اليوم:</label>
-                <input type="number" id="currentPrice" required step="0.01">
+            <!-- Main Form -->
+            <form id="goldForm" class="hidden">
+                <div class="input-group">
+                    <label for="weight">الوزن بالجرام:</label>
+                    <input type="number" id="weight" required step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="currentPrice">سعر الجرام اليوم:</label>
+                    <input type="number" id="currentPrice" required step="0.01">
+                </div>
+
+                <div class="input-group">
+                    <label for="offeredPrice">السعر المعروض:</label>
+                    <input type="number" id="offeredPrice" required step="0.01">
+                </div>
+
+                <button type="submit" class="calculate-btn">احسب</button>
+            </form>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden">
+                <h2>النتائج</h2>
+                <div id="resultDetails"></div>
+                <div id="recommendation" class="recommendation"></div>
             </div>
-
-            <div class="input-group">
-                <label for="offeredPrice">السعر المعروض:</label>
-                <input type="number" id="offeredPrice" required step="0.01">
-            </div>
-
-            <button type="submit" class="calculate-btn">احسب</button>
-        </form>
-
-        <!-- Results Section -->
-        <div id="results" class="hidden">
-            <h2>النتائج</h2>
-            <div id="resultDetails"></div>
-            <div id="recommendation" class="recommendation"></div>
         </div>
     </div>
 
     <!-- PayPal Script -->
-    <script src="https://www.paypal.com/sdk/js?client-id=ARGkT5cwaGt5KfqYeCOLr71gpT6rv2el5FwLE-DugMGBrnLNzq0mJpwExyCh_gNO4aLX3GDNDKlqC4kv&currency=AED&commit=true"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=ARGkT5cwaGt5KfqYeCOLr71gpT6rv2el5FwLE-DugMGBrnLNzq0mJpwExyCh_gNO4aLX3GDNDKlqC4kv&currency=AED&commit=true&components=buttons"></script>
     <script>
+        // Check payment status immediately
+        if (localStorage.getItem('goldCalculatorPaid') === 'true') {
+            document.getElementById('payment-section').style.display = 'none';
+            document.getElementById('calculator-section').style.display = 'block';
+        }
+
         paypal.Buttons({
             style: {
                 layout: 'vertical',
@@ -71,7 +81,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '9.99',
+                            value: '10.00',
                             currency_code: 'AED'
                         },
                         description: 'حاسبة الذهب - النسخة الكاملة'
@@ -85,16 +95,13 @@
                     message.innerHTML = 'تم الدفع بنجاح! شكراً لك';
                     message.className = 'payment-message success';
                     
-                    // Hide payment section after a delay
-                    setTimeout(() => {
-                        document.getElementById('payment-section').style.display = 'none';
-                    }, 3000);
+                    // Store payment status
+                    localStorage.setItem('goldCalculatorPaid', 'true');
+                    
+                    // Hide payment section and show calculator
+                    document.getElementById('payment-section').style.display = 'none';
+                    document.getElementById('calculator-section').style.display = 'block';
                 });
-            },
-            onError: function(err) {
-                const message = document.getElementById('payment-message');
-                message.innerHTML = 'حدث خطأ في عملية الدفع. الرجاء المحاولة مرة أخرى.';
-                message.className = 'payment-message error';
             }
         }).render('#paypal-button-container');
     </script>

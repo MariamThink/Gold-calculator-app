@@ -53,16 +53,22 @@ h1 {
 }
 
 .payment-note {
-    margin-top: 10px;
+    margin-top: 15px;
     color: #666;
     font-size: 14px;
+    text-align: center;
 }
 
 #paypal-button-container {
-    margin-top: 15px;
+    margin: 15px auto;
+    max-width: 300px;
 }
 
 /* Calculator Section Styles */
+.calculator-section {
+    display: none; /* Hidden by default */
+}
+
 .mode-selection {
     display: flex;
     gap: 10px;
@@ -163,6 +169,11 @@ input {
 .payment-message.success {
     background-color: #d4edda;
     color: #155724;
+}
+
+.payment-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
 @media (max-width: 480px) {
