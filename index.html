@@ -6,10 +6,6 @@
     <title>حاسبة الذهب</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
-    <!-- PayPal SDK -->
-    <script 
-        src="https://www.paypal.com/sdk/js?client-id=BAAQAgHcEnBwlvkburr-WmHTHAzltUn_iMKxFHHGN53YVcthCNmnsuAEJxZC43gj_Zdr95nkK8m1yGGU4c&components=hosted-buttons&disable-funding=venmo&currency=USD">
-    </script>
 </head>
 <body>
     <div class="container">
@@ -19,8 +15,13 @@
             <h2>احصل على النسخة الكاملة</h2>
             <p class="price">3 دولار أمريكي (11 درهم إماراتي تقريباً)</p>
             <div class="payment-buttons">
-                <!-- PayPal Hosted Button -->
-                <div id="paypal-container-U8EY4L5CP9L8A"></div>
+                <!-- PayPal Single Button -->
+                <style>.pp-U8EY4L5CP9L8A{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
+                <form action="https://www.paypal.com/ncp/payment/U8EY4L5CP9L8A" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                    <input class="pp-U8EY4L5CP9L8A" type="submit" value="اشتري الآن" />
+                    <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
+                    <section style="font-size: 0.75rem;"> مدعوم من <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
+                </form>
                 <p class="payment-note">اختر طريقة الدفع المناسبة</p>
             </div>
             <div id="payment-message" class="payment-message"></div>
@@ -65,7 +66,6 @@
         </div>
     </div>
 
-    <!-- PayPal Hosted Button Script -->
     <script>
         // Check payment status immediately
         if (localStorage.getItem('goldCalculatorPaid') === 'true') {
@@ -73,23 +73,14 @@
             document.getElementById('calculator-section').style.display = 'block';
         }
 
-        // Initialize PayPal Hosted Button
-        paypal.HostedButtons({
-            hostedButtonId: "U8EY4L5CP9L8A",
-            onApprove: function(data) {
-                // Store payment status
+        // Listen for payment success message from PayPal
+        window.addEventListener('message', function(event) {
+            if (event.data === 'payment_success') {
                 localStorage.setItem('goldCalculatorPaid', 'true');
-                
-                // Hide payment section and show calculator
                 document.getElementById('payment-section').style.display = 'none';
                 document.getElementById('calculator-section').style.display = 'block';
-                
-                // Show success message
-                const message = document.getElementById('payment-message');
-                message.innerHTML = 'تم الدفع بنجاح! شكراً لك';
-                message.className = 'payment-message success';
             }
-        }).render("#paypal-container-U8EY4L5CP9L8A");
+        });
     </script>
     <script src="script.js"></script>
 </body>
