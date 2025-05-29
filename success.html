@@ -5,19 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تم الدفع بنجاح - حاسبة الذهب</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-page {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .success-icon {
+            color: #28a745;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <div class="success-message">
+        <div class="success-page">
+            <div class="success-icon">✓</div>
             <h1>تم الدفع بنجاح!</h1>
-            <p>شكراً لك. سيتم تحويلك تلقائياً إلى الحاسبة...</p>
+            <p>شكراً لك على شراء حاسبة الذهب</p>
+            <p>جاري تحويلك إلى الحاسبة...</p>
         </div>
     </div>
     <script>
-        // Store payment status and redirect
+        // Store payment status
         localStorage.setItem('goldCalculatorPaid', 'true');
+        
+        // Redirect to main page after 2 seconds
         setTimeout(function() {
-            window.location.href = 'https://mariamthink.github.io/Gold-calculator-app/';
+            window.location.href = 'index.html';
         }, 2000);
     </script>
 </body>

@@ -13,11 +13,12 @@
         <div id="payment-section" class="payment-section">
             <h1>حاسبة الذهب</h1>
             <h2>احصل على النسخة الكاملة</h2>
-            <p class="price">3 دولار أمريكي (11 درهم إماراتي تقريباً)</p>
+            <p class="price">3 دولار أمريكي (12 درهم إماراتي تقريباً)</p>
             <div class="payment-buttons">
                 <!-- PayPal Single Button -->
                 <style>.pp-U8EY4L5CP9L8A{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
-                <form action="https://www.paypal.com/ncp/payment/U8EY4L5CP9L8A" method="post" target="_blank" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                <form action="https://www.paypal.com/ncp/payment/U8EY4L5CP9L8A" method="post" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
+                    <input type="hidden" name="return" value="https://mariamthink.github.io/Gold-calculator-app/success.html" />
                     <input class="pp-U8EY4L5CP9L8A" type="submit" value="اشتري الآن" />
                     <img src=https://www.paypalobjects.com/images/Debit_Credit_APM.svg alt="cards" />
                     <section style="font-size: 0.75rem;"> مدعوم من <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
@@ -27,8 +28,8 @@
             <div id="payment-message" class="payment-message"></div>
         </div>
 
-        <!-- Calculator Section - Hidden by default -->
-        <div id="calculator-section" class="calculator-section" style="display: none;">
+        <!-- Calculator Section -->
+        <div id="calculator-section" class="calculator-section">
             <h1>حاسبة الذهب</h1>
             
             <!-- Mode Selection -->
@@ -67,20 +68,12 @@
     </div>
 
     <script>
-        // Check payment status immediately
+        // Check if user has already paid
         if (localStorage.getItem('goldCalculatorPaid') === 'true') {
             document.getElementById('payment-section').style.display = 'none';
-            document.getElementById('calculator-section').style.display = 'block';
+        } else {
+            document.getElementById('calculator-section').style.display = 'none';
         }
-
-        // Listen for payment success message from PayPal
-        window.addEventListener('message', function(event) {
-            if (event.data === 'payment_success') {
-                localStorage.setItem('goldCalculatorPaid', 'true');
-                document.getElementById('payment-section').style.display = 'none';
-                document.getElementById('calculator-section').style.display = 'block';
-            }
-        });
     </script>
     <script src="script.js"></script>
 </body>
