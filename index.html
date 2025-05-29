@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حاسبة الذهب</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <div class="container">
+        <!-- Payment Section -->
+        <div id="payment-section" class="payment-section">
+            <h2>احصل على النسخة الكاملة</h2>
+            <p class="price">9.99 درهم إماراتي</p>
+            <div class="payment-buttons">
+                <!-- PayPal Button with Card Payment Option -->
+                <div id="paypal-button-container"></div>
+                <p class="payment-note">يمكنك الدفع بالبطاقة مباشرة بدون حساب PayPal</p>
+            </div>
+            <div id="payment-message" class="payment-message"></div>
+        </div>
+
+        <h1>حاسبة الذهب</h1>
+        
+        <!-- Mode Selection -->
+        <div class="mode-selection">
+            <button id="buyMode" class="mode-btn">شراء الذهب</button>
+            <button id="sellMode" class="mode-btn">بيع الذهب</button>
+        </div>
+
+        <!-- Main Form -->
+        <form id="goldForm" class="hidden">
+            <div class="input-group">
+                <label for="weight">الوزن بالجرام:</label>
+                <input type="number" id="weight" required step="0.01">
+            </div>
+
+            <div class="input-group">
+                <label for="currentPrice">سعر الجرام اليوم:</label>
+                <input type="number" id="currentPrice" required step="0.01">
+            </div>
+
+            <div class="input-group">
+                <label for="offeredPrice">السعر المعروض:</label>
+                <input type="number" id="offeredPrice" required step="0.01">
+            </div>
+
+            <button type="submit" class="calculate-btn">احسب</button>
+        </form>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden">
+            <h2>النتائج</h2>
+            <div id="resultDetails"></div>
+            <div id="recommendation" class="recommendation"></div>
+        </div>
+    </div>
+
+    <!-- PayPal Script -->
+    <script src="https://www.paypal.com/sdk/js?client-id=ARGkT5cwaGt5KfqYeCOLr71gpT6rv2el5FwLE-DugMGBrnLNzq0mJpwExyCh_gNO4aLX3GDNDKlqC4kv&currency=AED&commit=true"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color: 'gold',
+                shape: 'rect',
+                label: 'paypal'
+            },
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '9.99',
+                            currency_code: 'AED'
+                        },
+                        description: 'حاسبة الذهب - النسخة الكاملة'
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    // Show success message
+                    const message = document.getElementById('payment-message');
+                    message.innerHTML = 'تم الدفع بنجاح! شكراً لك';
+                    message.className = 'payment-message success';
+                    
+                    // Hide payment section after a delay
+                    setTimeout(() => {
+                        document.getElementById('payment-section').style.display = 'none';
+                    }, 3000);
+                });
+            },
+            onError: function(err) {
+                const message = document.getElementById('payment-message');
+                message.innerHTML = 'حدث خطأ في عملية الدفع. الرجاء المحاولة مرة أخرى.';
+                message.className = 'payment-message error';
+            }
+        }).render('#paypal-button-container');
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
