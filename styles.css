@@ -5,7 +5,6 @@
     --text-color: #333;
     --success-color: #28a745;
     --error-color: #dc3545;
-    --instagram-color: #E4405F;
 }
 
 * {
@@ -30,28 +29,12 @@ body {
     flex-direction: column;
 }
 
-/* Logo Styles */
-.logo-container {
+h1 {
     text-align: center;
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.logo {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 10px;
-}
-
-.logo-container h1 {
-    margin: 0;
     color: var(--primary-color);
+    margin-bottom: 30px;
 }
 
-/* Calculator Section */
 .calculator-section {
     background: white;
     border-radius: 8px;
@@ -151,30 +134,51 @@ input {
     color: #721c24;
 }
 
-/* Instagram Banner */
-.instagram-banner {
-    text-align: center;
-    padding: 15px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+/* Social Banner */
+.social-banner {
     margin-top: auto;
+    width: 100%;
+    background-color: #1e4d7b;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.instagram-banner a {
+.social-banner a {
+    text-decoration: none;
+    color: white;
+}
+
+.banner-content {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    color: var(--instagram-color);
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
+    padding: 15px;
+    gap: 20px;
 }
 
-.instagram-icon {
-    width: 24px;
-    height: 24px;
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.divider {
+    width: 2px;
+    height: 30px;
+    background-color: white;
+}
+
+.instagram {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.instagram img {
+    width: 32px;
+    height: 32px;
 }
 
 /* Install Prompt */
@@ -228,5 +232,19 @@ input {
     input {
         padding: 10px;
         font-size: 14px;
+    }
+
+    .banner-content {
+        padding: 10px;
+        gap: 15px;
+    }
+
+    .logo, .instagram {
+        font-size: 16px;
+    }
+
+    .instagram img {
+        width: 24px;
+        height: 24px;
     }
 }
