@@ -5,35 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تم الدفع بنجاح - حاسبة الذهب</title>
     <link rel="stylesheet" href="styles.css">
-    <style>
-        .success-page {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .success-icon {
-            color: #28a745;
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-    </style>
+    <meta http-equiv="refresh" content="0;url=calculator.html">
+    <script>
+        window.location.href = 'calculator.html';
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="success-page">
-            <div class="success-icon">✓</div>
-            <h1>تم الدفع بنجاح!</h1>
-            <p>شكراً لك على شراء حاسبة الذهب</p>
-            <p>جاري تحويلك إلى الحاسبة...</p>
+            <h1>جاري تحويلك إلى الحاسبة...</h1>
+            <p>إذا لم يتم تحويلك تلقائياً، <a href="calculator.html">انقر هنا</a></p>
         </div>
     </div>
-    <script>
-        // Store payment status in localStorage
-        localStorage.setItem('goldCalculatorPaid', 'true');
-        
-        // Redirect to main page after 2 seconds
-        setTimeout(function() {
-            window.location.replace('index.html');
-        }, 2000);
-    </script>
 </body>
 </html>
