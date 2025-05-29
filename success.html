@@ -27,12 +27,12 @@
         </div>
     </div>
     <script>
-        // Store payment status
+        // Store payment status in localStorage
         localStorage.setItem('goldCalculatorPaid', 'true');
         
         // Redirect to main page after 2 seconds
         setTimeout(function() {
-            window.location.href = 'index.html';
+            window.location.replace('index.html');
         }, 2000);
     </script>
 </body>

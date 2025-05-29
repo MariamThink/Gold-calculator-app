@@ -32,6 +32,37 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* Features List Styles */
+.features-list {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.features-list h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+.features-list ul {
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+.features-list li {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.features-list li:before {
+    content: "✓";
+    color: var(--success-color);
+    position: absolute;
+    right: -20px;
+}
+
 /* Payment Section Styles */
 .payment-section {
     background: white;
@@ -58,30 +89,14 @@ h1 {
     margin-top: 15px;
     color: #666;
     font-size: 14px;
-    text-align: center;
-}
-
-/* Success/Cancel Message Styles */
-.success-message, .cancel-message {
-    background: white;
-    border-radius: 8px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-top: 50px;
-}
-
-.success-message h1 {
-    color: var(--success-color);
-}
-
-.cancel-message h1 {
-    color: var(--error-color);
 }
 
 /* Calculator Section Styles */
 .calculator-section {
-    display: none;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .mode-selection {
@@ -174,27 +189,42 @@ input {
     color: #721c24;
 }
 
-.payment-message {
-    margin-top: 15px;
+/* Install Prompt Styles */
+.install-prompt {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.install-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.install-button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Offline Status Styles */
+.offline-status {
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    color: #004085;
     padding: 10px;
     border-radius: 4px;
-    font-weight: bold;
-}
-
-.payment-message.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.payment-message.error {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-/* PayPal Button Container */
-form[action*="paypal"] {
+    margin-top: 20px;
     text-align: center;
-    margin: 20px 0;
+    font-size: 14px;
 }
 
 @media (max-width: 480px) {
