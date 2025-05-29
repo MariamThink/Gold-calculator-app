@@ -3,8 +3,6 @@
     --secondary-color: #daa520;
     --background-color: #f8f8f8;
     --text-color: #333;
-    --success-color: #28a745;
-    --error-color: #dc3545;
 }
 
 * {
@@ -18,125 +16,90 @@ body {
     background-color: var(--background-color);
     color: var(--text-color);
     line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
+    width: 100%;
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+}
+
+.payment-section {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
 h1 {
-    text-align: center;
     color: var(--primary-color);
-    margin-bottom: 30px;
-}
-
-.calculator-section {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    flex-grow: 1;
     margin-bottom: 20px;
+    font-size: 2.5em;
 }
 
-.mode-selection {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+h2 {
+    margin-bottom: 15px;
+    font-size: 1.8em;
 }
 
-.mode-btn {
-    flex: 1;
-    padding: 12px;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--secondary-color);
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
+.price {
+    font-size: 1.4em;
+    margin-bottom: 25px;
+    color: var(--text-color);
 }
 
-.mode-btn:hover {
-    background-color: var(--primary-color);
+.features-list {
+    text-align: right;
+    margin: 30px 0;
+    padding: 0 20px;
 }
 
-.mode-btn.active {
-    background-color: var(--primary-color);
+.features-list h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
 }
 
-.input-group {
-    margin-bottom: 20px;
+.features-list ul {
+    list-style: none;
 }
 
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+.features-list li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-right: 25px;
 }
 
-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 16px;
+.features-list li:before {
+    content: "•";
+    color: var(--primary-color);
+    position: absolute;
+    right: 0;
 }
 
-.calculate-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.calculate-btn:hover {
-    background-color: var(--secondary-color);
-}
-
-.hidden {
-    display: none;
-}
-
-#results {
+.payment-buttons {
     margin-top: 30px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.recommendation {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-align: center;
+.payment-buttons form {
+    margin: 0 auto;
+    max-width: 300px;
 }
 
-.recommendation.positive {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.recommendation.negative {
-    background-color: #f8d7da;
-    color: #721c24;
+.payment-note {
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.9em;
 }
 
 /* Social Banner */
 .social-banner {
-    margin-top: auto;
+    margin-top: 20px;
     width: 100%;
     background-color: #1e4d7b;
     border-radius: 8px;
@@ -181,70 +144,28 @@ input {
     height: 32px;
 }
 
-/* Install Prompt */
-.install-prompt {
-    background-color: #fff3cd;
-    border: 1px solid #ffeeba;
-    color: #856404;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-.install-button {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
-    font-size: 14px;
-}
-
-.install-button:hover {
-    background-color: var(--secondary-color);
-}
-
-/* Offline Status */
-.offline-status {
-    background-color: #cce5ff;
-    border: 1px solid #b8daff;
-    color: #004085;
-    padding: 10px;
-    border-radius: 4px;
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-}
-
 @media (max-width: 480px) {
     .container {
         padding: 15px;
     }
-    
-    .mode-btn {
-        padding: 10px;
-        font-size: 14px;
-    }
-    
-    input {
-        padding: 10px;
-        font-size: 14px;
+
+    .payment-section {
+        padding: 20px;
     }
 
-    .banner-content {
-        padding: 10px;
-        gap: 15px;
+    h1 {
+        font-size: 2em;
     }
 
-    .logo, .instagram {
-        font-size: 16px;
+    h2 {
+        font-size: 1.5em;
     }
 
-    .instagram img {
-        width: 24px;
-        height: 24px;
+    .price {
+        font-size: 1.2em;
+    }
+
+    .features-list {
+        padding: 0 10px;
     }
 }
