@@ -74,7 +74,7 @@ body {
     margin-right: 8px;
 }
 
-/* Main Container */
+/* Container */
 .container {
     width: 100%;
     max-width: 600px;
@@ -85,19 +85,30 @@ body {
     flex-direction: column;
 }
 
+/* Payment Section */
 .payment-section {
     background: white;
     border-radius: 8px;
     padding: 30px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
     text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Calculator Section */
+.calculator-section {
+    background: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
 }
 
 h1 {
     color: var(--primary-color);
     margin-bottom: 20px;
     font-size: 2.5em;
+    text-align: center;
 }
 
 h2 {
@@ -139,19 +150,96 @@ h2 {
     right: 0;
 }
 
-.payment-buttons {
+/* Calculator Form */
+.mode-selection {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.mode-btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.mode-btn:hover {
+    background-color: var(--primary-color);
+}
+
+.mode-btn.active {
+    background-color: var(--primary-color);
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.calculate-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Results Section */
+#results {
     margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.payment-buttons form {
-    margin: 0 auto;
-    max-width: 300px;
+.recommendation {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
 }
 
-.payment-note {
-    margin-top: 15px;
-    color: #666;
-    font-size: 0.9em;
+.recommendation.positive {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.recommendation.negative {
+    background-color: #f8d7da;
+    color: #721c24;
 }
 
 /* Bottom Banner */
@@ -168,12 +256,66 @@ h2 {
     display: block;
 }
 
+/* Payment Buttons */
+.payment-buttons {
+    margin-top: 30px;
+}
+
+.payment-buttons form {
+    margin: 0 auto;
+    max-width: 300px;
+}
+
+.payment-note {
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* Install Prompt */
+.install-prompt {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.install-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.install-button:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Offline Status */
+.offline-status {
+    background-color: #cce5ff;
+    border: 1px solid #b8daff;
+    color: #004085;
+    padding: 10px;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
 @media (max-width: 480px) {
     .container {
         padding: 15px;
     }
 
-    .payment-section {
+    .calculator-section, .payment-section {
         padding: 20px;
     }
 
@@ -191,6 +333,16 @@ h2 {
 
     .features-list {
         padding: 0 10px;
+    }
+
+    .mode-btn {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 14px;
     }
 
     .banner-content {
