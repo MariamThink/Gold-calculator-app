@@ -6,6 +6,8 @@
     <title>حاسبة الذهب</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
+    <!-- Add PayPal SDK with all required parameters -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AbkEfH4PAgvVxLeuys8vq7_94Ms1ygUorQSAOdMTgcZjVsugi7baqHBDoctJLhAMGzZKAEYVKip4HIJj&currency=AED&intent=capture&enable-funding=card"></script>
 </head>
 <body>
     <div class="container">
@@ -15,9 +17,9 @@
             <h2>احصل على النسخة الكاملة</h2>
             <p class="price">10 درهم إماراتي</p>
             <div class="payment-buttons">
-                <!-- Single PayPal Button that handles both PayPal and Card payments -->
+                <!-- PayPal Buttons Container -->
                 <div id="paypal-button-container"></div>
-                <p class="payment-note">اختر طريقة الدفع المناسبة (PayPal أو البطاقة البنكية)</p>
+                <p class="payment-note">اختر طريقة الدفع المناسبة</p>
             </div>
             <div id="payment-message" class="payment-message"></div>
         </div>
@@ -61,8 +63,6 @@
         </div>
     </div>
 
-    <!-- PayPal Script -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AbkEfH4PAgvVxLeuys8vq7_94Ms1ygUorQSAOdMTgcZjVsugi7baqHBDoctJLhAMGzZKAEYVKip4HIJj&currency=AED"></script>
     <script>
         // Check payment status immediately
         if (localStorage.getItem('goldCalculatorPaid') === 'true') {
@@ -70,15 +70,11 @@
             document.getElementById('calculator-section').style.display = 'block';
         }
 
-        paypal.Buttons({
-            style: {
-                layout: 'vertical',
-                color: 'gold',
-                shape: 'rect'
-            },
+        // Wait for PayPal SDK to load
+        window.paypal.Buttons({
+            // Set up the transaction
             createOrder: function(data, actions) {
                 return actions.order.create({
-                    intent: 'CAPTURE',
                     purchase_units: [{
                         amount: {
                             value: '10.00',
@@ -88,8 +84,10 @@
                     }]
                 });
             },
+
+            // Finalize the transaction
             onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
+                return actions.order.capture().then(function(orderData) {
                     // Show success message
                     const message = document.getElementById('payment-message');
                     message.innerHTML = 'تم الدفع بنجاح! شكراً لك';
@@ -103,10 +101,12 @@
                     document.getElementById('calculator-section').style.display = 'block';
                 });
             },
+
+            // Handle errors
             onError: function(err) {
                 console.error('PayPal Error:', err);
                 const message = document.getElementById('payment-message');
-                message.innerHTML = 'حدث خطأ في عملية الدفع. الرجاء المحاولة مرة أخرى أو اختيار طريقة دفع أخرى.';
+                message.innerHTML = 'حدث خطأ في عملية الدفع. الرجاء المحاولة مرة أخرى.';
                 message.className = 'payment-message error';
             }
         }).render('#paypal-button-container');
