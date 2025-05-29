@@ -5,6 +5,7 @@
     --text-color: #333;
     --success-color: #28a745;
     --error-color: #dc3545;
+    --instagram-color: #E4405F;
 }
 
 * {
@@ -24,79 +25,40 @@ body {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
-h1 {
+/* Logo Styles */
+.logo-container {
     text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 30px;
-}
-
-/* Features List Styles */
-.features-list {
-    background: white;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: white;
     border-radius: 8px;
-    padding: 20px;
-    margin: 20px 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-.features-list h3 {
-    color: var(--primary-color);
-    margin-bottom: 15px;
-}
-
-.features-list ul {
-    list-style-type: none;
-    padding-right: 20px;
-}
-
-.features-list li {
+.logo {
+    width: 48px;
+    height: 48px;
     margin-bottom: 10px;
-    position: relative;
 }
 
-.features-list li:before {
-    content: "✓";
-    color: var(--success-color);
-    position: absolute;
-    right: -20px;
-}
-
-/* Payment Section Styles */
-.payment-section {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 30px;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.price {
-    font-size: 24px;
+.logo-container h1 {
+    margin: 0;
     color: var(--primary-color);
-    margin: 15px 0;
-    font-weight: bold;
 }
 
-.payment-buttons {
-    max-width: 300px;
-    margin: 20px auto;
-}
-
-.payment-note {
-    margin-top: 15px;
-    color: #666;
-    font-size: 14px;
-}
-
-/* Calculator Section Styles */
+/* Calculator Section */
 .calculator-section {
     background: white;
     border-radius: 8px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex-grow: 1;
+    margin-bottom: 20px;
 }
 
 .mode-selection {
@@ -189,7 +151,33 @@ input {
     color: #721c24;
 }
 
-/* Install Prompt Styles */
+/* Instagram Banner */
+.instagram-banner {
+    text-align: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-top: auto;
+}
+
+.instagram-banner a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--instagram-color);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.instagram-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Install Prompt */
 .install-prompt {
     background-color: #fff3cd;
     border: 1px solid #ffeeba;
@@ -215,7 +203,7 @@ input {
     background-color: var(--secondary-color);
 }
 
-/* Offline Status Styles */
+/* Offline Status */
 .offline-status {
     background-color: #cce5ff;
     border: 1px solid #b8daff;
@@ -240,9 +228,5 @@ input {
     input {
         padding: 10px;
         font-size: 14px;
-    }
-
-    .payment-buttons {
-        max-width: 100%;
     }
 }
