@@ -122,32 +122,44 @@ h2 {
     color: var(--text-color);
 }
 
-.features-list {
+.installation-guide {
     text-align: right;
     margin: 30px 0;
     padding: 0 20px;
 }
 
-.features-list h3 {
+.installation-guide h3 {
     margin-bottom: 15px;
     color: var(--primary-color);
 }
 
-.features-list ul {
+.installation-guide ul {
     list-style: none;
 }
 
-.features-list li {
-    margin-bottom: 10px;
+.installation-guide li {
+    margin-bottom: 15px;
     position: relative;
     padding-right: 25px;
 }
 
-.features-list li:before {
+.installation-guide li:before {
     content: "•";
     color: var(--primary-color);
     position: absolute;
     right: 0;
+}
+
+.installation-guide li strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.installation-guide li br + span {
+    display: block;
+    margin-right: 15px;
+    color: #666;
+    font-size: 0.9em;
 }
 
 /* Calculator Form */
@@ -331,9 +343,10 @@ input {
         font-size: 1.2em;
     }
 
-    .features-list {
+    .installation-guide {
         padding: 0 10px;
     }
+
 
     .mode-btn {
         padding: 10px;

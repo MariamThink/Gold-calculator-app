@@ -25,16 +25,18 @@
             <h1>حاسبة الذهب</h1>
             <h2>احصل على النسخة الكاملة</h2>
             <p class="price">3 دولار أمريكي (12 درهم إماراتي تقريباً)</p>
-            <div class="features-list">
-                <h3>المميزات:</h3>
+            <div class="installation-guide">
+                <h3>طريقة التنزيل:</h3>
                 <ul>
-                    <li>حساب سعر الذهب للبيع والشراء</li>
-                    <li>يعمل بدون إنترنت</li>
-                    <li>يمكن تثبيته كتطبيق على هاتفك</li>
-                    <li>واجهة سهلة الاستخدام باللغة العربية</li>
+                    <li><strong>إضافة إلى الشاشة الرئيسية (Add to Home Screen):</strong>
+                        <br>• على iPhone: اضغط على زر المشاركة (المربع والسهم)، ثم اختر 'إضافة للشاشة الرئيسية - Add to Home Screen'
+                        <br>• على Android: اضغط على النقاط الثلاث ثم 'إضافة للشاشة الرئيسية - Add to Home Screen'
+                    </li>
+                    <li><strong>بعد الإضافة:</strong> افتح التطبيق من الشاشة الرئيسية</li>
+                    <li><strong>الدفع سيكون من خلال التطبيق</strong></li>
                 </ul>
             </div>
-            <div class="payment-buttons">
+            <div class="payment-buttons" id="payment-section" style="display: none;">
                 <!-- PayPal Button -->
                 <style>.pp-U8EY4L5CP9L8A{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
                 <form action="https://www.paypal.com/ncp/payment/U8EY4L5CP9L8A" method="post" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
@@ -43,6 +45,12 @@
                     <section style="font-size: 0.75rem;"> Powered by <img src="https://www.paypalobjects.com/paypal-ui/logos/svg/paypal-wordmark-color.svg" alt="paypal" style="height:0.875rem;vertical-align:middle;"/></section>
                 </form>
                 <p class="payment-note">اختر طريقة الدفع المناسبة</p>
+            </div>
+            
+            <div class="pwa-message" id="pwa-message">
+                <p style="color: #666; font-size: 0.9em; text-align: center; margin-top: 20px;">
+                    يرجى إضافة التطبيق إلى الشاشة الرئيسية أولاً لإظهار خيارات الدفع
+                </p>
             </div>
         </div>
 
@@ -60,5 +68,6 @@
             </a>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
