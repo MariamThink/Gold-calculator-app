@@ -32,11 +32,18 @@
                         <br>• على iPhone: اضغط على زر المشاركة (المربع والسهم)، ثم اختر 'إضافة للشاشة الرئيسية - Add to Home Screen'
                         <br>• على Android: اضغط على النقاط الثلاث ثم 'إضافة للشاشة الرئيسية - Add to Home Screen'
                     </li>
-                    <li><strong>بعد الإضافة:</strong> افتح التطبيق من الشاشة الرئيسية</li>
-                    <li><strong>الدفع سيكون من خلال التطبيق</strong></li>
+                    <li><strong>بعد الإضافة:</strong> اغلق المتصفح وافتح التطبيق من الشاشة الرئيسية</li>
+                    <li><strong>الدفع:</strong> ادفع من خلال التطبيق المثبت وليس من هذه الصفحة</li>
                 </ul>
             </div>
             <div class="payment-buttons" id="payment-section" style="display: none;">
+                <!-- Payment Instructions for PWA users -->
+                <div class="payment-instructions" style="background-color: #f0f8ff; border: 1px solid #0066cc; border-radius: 8px; padding: 15px; margin-bottom: 20px; text-align: center;">
+                    <p style="margin: 0; color: #0066cc; font-weight: bold; font-size: 0.9em;">
+                        📌 تعليمات مهمة: بعد إتمام الدفع، اضغط على زر "Return to Merchant" للعودة إلى التطبيق
+                    </p>
+                </div>
+                
                 <!-- PayPal Button -->
                 <style>.pp-U8EY4L5CP9L8A{text-align:center;border:none;border-radius:0.25rem;min-width:11.625rem;padding:0 2rem;height:2.625rem;font-weight:bold;background-color:#FFD140;color:#000000;font-family:"Helvetica Neue",Arial,sans-serif;font-size:1rem;line-height:1.25rem;cursor:pointer;}</style>
                 <form action="https://www.paypal.com/ncp/payment/U8EY4L5CP9L8A" method="post" style="display:inline-grid;justify-items:center;align-content:start;gap:0.5rem;">
