@@ -54,6 +54,21 @@
                     <input type="number" id="offeredPrice" required step="0.01">
                 </div>
 
+                <!-- Tax inclusion question for buy mode only -->
+                <div class="input-group" id="taxQuestion" style="display: none;">
+                    <label>اسأل البائع: هل السعر المعروض مع أو بدون الضريبة؟</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="taxIncluded" value="yes" id="taxYes">
+                            <span>مع الضريبة</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="taxIncluded" value="no" id="taxNo" checked>
+                            <span>بدون الضريبة</span>
+                        </label>
+                    </div>
+                </div>
+
                 <button type="submit" class="calculate-btn">احسب</button>
             </form>
 

@@ -5,39 +5,9 @@ const goldForm = document.getElementById('goldForm');
 const resultsDiv = document.getElementById('results');
 const resultDetails = document.getElementById('resultDetails');
 const recommendation = document.getElementById('recommendation');
-const paymentSection = document.getElementById('payment-section');
-const pwaMessage = document.getElementById('pwa-message');
+const taxQuestion = document.getElementById('taxQuestion');
 
 let currentMode = null;
-
-// Check if the app is running as a PWA
-function isPWA() {
-    return window.matchMedia('(display-mode: standalone)').matches || 
-           window.navigator.standalone || 
-           document.referrer.includes('android-app://');
-}
-
-// Show/hide payment section based on PWA status
-function updatePaymentVisibility() {
-    if (isPWA()) {
-        paymentSection.style.display = 'block';
-        pwaMessage.style.display = 'none';
-    } else {
-        paymentSection.style.display = 'none';
-        pwaMessage.style.display = 'block';
-    }
-}
-
-// Check on page load and when display mode changes
-window.addEventListener('load', updatePaymentVisibility);
-window.matchMedia('(display-mode: standalone)').addListener(updatePaymentVisibility);
-
-// Re-check visibility when the page becomes visible (in case of app installation)
-document.addEventListener('visibilitychange', () => {
-    if (!document.hidden) {
-        updatePaymentVisibility();
-    }
-});
 
 // Event Listeners
 buyModeBtn.addEventListener('click', () => setMode('buy'));
@@ -51,6 +21,13 @@ function setMode(mode) {
     sellModeBtn.classList.toggle('active', mode === 'sell');
     goldForm.classList.remove('hidden');
     resultsDiv.classList.add('hidden');
+    
+    // Show/hide tax question based on mode
+    if (mode === 'buy') {
+        taxQuestion.style.display = 'block';
+    } else {
+        taxQuestion.style.display = 'none';
+    }
 }
 
 // Format number to show in English numerals without currency
@@ -95,7 +72,7 @@ function calculateSellMode(weight, currentPrice, offeredPrice) {
     resultDetails.innerHTML = `
         <p>القيمة الفعلية للذهب: ${formatNumber(actualValue)}</p>
         <p>السعر المعروض: ${formatNumber(offeredPrice)}</p>
-        <p>الفرق: ${formatNumber(Math.abs(difference))}</p>
+        <p>ربح البائع: ${formatNumber(Math.abs(difference))}</p>
     `;
     
     recommendation.className = `recommendation ${recommendationClass}`;
@@ -105,29 +82,49 @@ function calculateSellMode(weight, currentPrice, offeredPrice) {
 // Calculate buying scenario
 function calculateBuyMode(weight, currentPrice, offeredPrice) {
     const actualPrice = weight * currentPrice;
-    const priceWithTax = actualPrice * 1.05; // 5% tax
-    const buyerProfit = offeredPrice - priceWithTax;
-    const manufacturingPrice = buyerProfit / weight;
-    const profitPercentage = (buyerProfit / actualPrice) * 100;
+    const taxIncluded = document.querySelector('input[name="taxIncluded"]:checked').value === 'yes';
+    
+    let buyerProfit, manufacturingPrice, profitPercentage;
+    let resultHTML = '';
+    
+    if (taxIncluded) {
+        // السعر المعروض مع الضريبة
+        const priceWithTax = actualPrice + (actualPrice * 0.05); // 5% tax
+        buyerProfit = offeredPrice - priceWithTax;
+        manufacturingPrice = buyerProfit / weight;
+        profitPercentage = (buyerProfit / actualPrice) * 100;
+        
+        resultHTML = `
+            <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
+            <p>سعر الذهب مع الضريبة: ${formatNumber(priceWithTax)}</p>
+            <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
+            <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
+        `;
+    } else {
+        // السعر المعروض بدون الضريبة
+        buyerProfit = offeredPrice - actualPrice;
+        manufacturingPrice = buyerProfit / weight;
+        profitPercentage = (buyerProfit / actualPrice) * 100;
+        
+        resultHTML = `
+            <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
+            <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
+            <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
+        `;
+    }
     
     let recommendationText = '';
     let recommendationClass = '';
     
     if (profitPercentage > 10) {
-        recommendationText = 'ربح البائع مرتفع (أكثر من 10٪) - يمكنك التفاوض على سعر أفضل';
+        recommendationText = 'ربح البائع مرتفع (أكثر من 10%) - يمكنك التفاوض على سعر أفضل';
         recommendationClass = 'negative';
     } else {
-        recommendationText = 'السعر معقول - يمكنك الشراء';
+        recommendationText = 'يمكنك الشراء في هذه الحالة';
         recommendationClass = 'positive';
     }
     
-    resultDetails.innerHTML = `
-        <p>سعر الذهب بدون الضريبة: ${formatNumber(actualPrice)}</p>
-        <p>سعر الذهب مع الضريبة (5٪): ${formatNumber(priceWithTax)}</p>
-        <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
-        <p>سعر التصنيع للجرام: ${formatNumber(manufacturingPrice)}</p>
-    `;
-    
+    resultDetails.innerHTML = resultHTML;
     recommendation.className = `recommendation ${recommendationClass}`;
     recommendation.textContent = recommendationText;
 }
