@@ -9,6 +9,7 @@
     "orientation": "portrait",
     "dir": "rtl",
     "lang": "ar",
+    "version": "2.0.0",
     "icons": [
         {
             "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='192' height='192'%3E%3Cpath fill='%23b8860b' d='M12 3L2 12h3v8h14v-8h3L12 3z'/%3E%3C/svg%3E",
