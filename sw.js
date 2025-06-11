@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gold-calculator-v2';
+const CACHE_NAME = 'gold-calculator-v2024.05';
 const urlsToCache = [
   '/Gold-calculator-app/',
   '/Gold-calculator-app/index.html',

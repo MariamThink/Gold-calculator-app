@@ -114,8 +114,9 @@ function calculateSellMode(weight, currentPrice, offeredPrice) {
     recommendation.textContent = recommendationText;
 }
 
-// Calculate buying scenario
+// Calculate buying scenario - v2024.01
 function calculateBuyMode(weight, currentPrice, offeredPrice) {
+    console.log("Using updated script v2024.01 - New order applied");
     const actualPrice = weight * currentPrice;
     const taxIncluded = document.querySelector('input[name="taxIncluded"]:checked').value === 'yes';
     
@@ -123,27 +124,24 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
     let resultHTML = '';
     
     if (taxIncluded) {
-        // السعر المعروض مع الضريبة - حساب السعر بدون ضريبة
-        const priceWithoutTax = offeredPrice / 1.05; // السعر بدون ضريبة
-        const taxAmount = offeredPrice - priceWithoutTax; // قيمة الضريبة
-        buyerProfit = priceWithoutTax - actualPrice;
-        manufacturingPrice = buyerProfit / weight;
+        // السعر المعروض مع الضريبة
+        const taxPrice = offeredPrice - (offeredPrice / 1.05); // سعر الضريبة = السعر المعروض - (السعر المعروض ÷ 1.05)
+        buyerProfit = offeredPrice - actualPrice - taxPrice; // ربح البائع = السعر المعروض - سعر الذهب - سعر الضريبة
+        manufacturingPrice = buyerProfit / weight; // المصنعية = ربح البائع ÷ الوزن
         profitPercentage = (buyerProfit / actualPrice) * 100;
         
-        // الترتيب المطلوب: سعر الذهب، سعر التصنيع، ربح البائع، قيمة الضريبة
         resultHTML = `
             <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
             <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
+            <p>سعر الضريبة: ${formatNumber(taxPrice)}</p>
             <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
-            <p>قيمة الضريبة: ${formatNumber(taxAmount)}</p>
         `;
     } else {
         // السعر المعروض بدون الضريبة
-        buyerProfit = offeredPrice - actualPrice;
-        manufacturingPrice = buyerProfit / weight;
+        buyerProfit = offeredPrice - actualPrice; // ربح البائع = السعر المعروض - سعر الذهب
+        manufacturingPrice = buyerProfit / weight; // المصنعية = ربح البائع ÷ الوزن
         profitPercentage = (buyerProfit / actualPrice) * 100;
         
-        // الترتيب المطلوب: سعر الذهب، سعر التصنيع، ربح البائع
         resultHTML = `
             <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
             <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
