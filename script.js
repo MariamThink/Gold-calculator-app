@@ -5,14 +5,49 @@ const goldForm = document.getElementById('goldForm');
 const resultsDiv = document.getElementById('results');
 const resultDetails = document.getElementById('resultDetails');
 const recommendation = document.getElementById('recommendation');
+const paymentSection = document.getElementById('payment-section');
+const pwaMessage = document.getElementById('pwa-message');
 const taxQuestion = document.getElementById('taxQuestion');
 
 let currentMode = null;
 
-// Event Listeners
-buyModeBtn.addEventListener('click', () => setMode('buy'));
-sellModeBtn.addEventListener('click', () => setMode('sell'));
-goldForm.addEventListener('submit', handleCalculation);
+// Check if the app is running as a PWA
+function isPWA() {
+    return window.matchMedia('(display-mode: standalone)').matches || 
+           window.navigator.standalone || 
+           document.referrer.includes('android-app://');
+}
+
+// Show/hide payment section based on PWA status
+function updatePaymentVisibility() {
+    if (paymentSection && pwaMessage) {
+        if (isPWA()) {
+            paymentSection.style.display = 'block';
+            pwaMessage.style.display = 'none';
+        } else {
+            paymentSection.style.display = 'none';
+            pwaMessage.style.display = 'block';
+        }
+    }
+}
+
+// Check on page load and when display mode changes
+window.addEventListener('load', updatePaymentVisibility);
+window.matchMedia('(display-mode: standalone)').addListener(updatePaymentVisibility);
+
+// Re-check visibility when the page becomes visible (in case of app installation)
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden) {
+        updatePaymentVisibility();
+    }
+});
+
+// Event Listeners - only add if elements exist (for calculator page)
+if (buyModeBtn && sellModeBtn && goldForm) {
+    buyModeBtn.addEventListener('click', () => setMode('buy'));
+    sellModeBtn.addEventListener('click', () => setMode('sell'));
+    goldForm.addEventListener('submit', handleCalculation);
+}
 
 // Set calculation mode
 function setMode(mode) {
