@@ -123,17 +123,18 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
     let resultHTML = '';
     
     if (taxIncluded) {
-        // السعر المعروض مع الضريبة
-        const priceWithTax = actualPrice + (actualPrice * 0.05); // 5% tax
-        buyerProfit = offeredPrice - priceWithTax;
+        // السعر المعروض مع الضريبة - حساب السعر بدون ضريبة
+        const priceWithoutTax = offeredPrice / 1.05; // السعر بدون ضريبة
+        const taxAmount = offeredPrice - priceWithoutTax; // قيمة الضريبة
+        buyerProfit = priceWithoutTax - actualPrice;
         manufacturingPrice = buyerProfit / weight;
         profitPercentage = (buyerProfit / actualPrice) * 100;
         
         resultHTML = `
             <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
-            <p>سعر الذهب مع الضريبة: ${formatNumber(priceWithTax)}</p>
-            <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
             <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
+            <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
+            <p>قيمة الضريبة: ${formatNumber(taxAmount)}</p>
         `;
     } else {
         // السعر المعروض بدون الضريبة
@@ -143,8 +144,8 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
         
         resultHTML = `
             <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
-            <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
             <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
+            <p>ربح البائع: ${formatNumber(buyerProfit)}</p>
         `;
     }
     
