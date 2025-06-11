@@ -130,6 +130,7 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
         manufacturingPrice = buyerProfit / weight;
         profitPercentage = (buyerProfit / actualPrice) * 100;
         
+        // الترتيب المطلوب: سعر الذهب، سعر التصنيع، ربح البائع، قيمة الضريبة
         resultHTML = `
             <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
             <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
@@ -142,6 +143,7 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
         manufacturingPrice = buyerProfit / weight;
         profitPercentage = (buyerProfit / actualPrice) * 100;
         
+        // الترتيب المطلوب: سعر الذهب، سعر التصنيع، ربح البائع
         resultHTML = `
             <p>سعر الذهب: ${formatNumber(actualPrice)}</p>
             <p>سعر التصنيع (المصنعية) للجرام: ${formatNumber(manufacturingPrice)}</p>
