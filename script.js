@@ -153,10 +153,10 @@ function calculateBuyMode(weight, currentPrice, offeredPrice) {
     let recommendationClass = '';
     
     if (profitPercentage > 10) {
-        recommendationText = 'ربح البائع مرتفع (أكثر من 10%) - يمكنك التفاوض على سعر أفضل';
+        recommendationText = 'ربح البائع مرتفع أكثر من 10% - قم بالتفاوض على سعر مصنعية أقل';
         recommendationClass = 'negative';
     } else {
-        recommendationText = 'يمكنك الشراء في هذه الحالة';
+        recommendationText = ' ربح البائع أقل من 10% - يمكنك الشراء في هذه الحالة ،ولكن لا مانع للتفاوض على سعر مصنعية أقل';
         recommendationClass = 'positive';
     }
     
