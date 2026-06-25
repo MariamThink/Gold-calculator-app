@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gold-calculator-v2026.06.28'; // always change this when you make updates
+const CACHE_NAME = 'gold-calculator-v2026.06.29'; // always change this when you make updates
 const urlsToCache = [
   '/Gold-calculator-app/',
   '/Gold-calculator-app/index.html',
