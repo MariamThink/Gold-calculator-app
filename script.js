@@ -1,5 +1,5 @@
 // DOM Elements
-const DISCOUNT_CODE = "GOLD2026"; // غيري الكود من هنا كل مرة
+const DISCOUNT_CODE = "Zainab2026"; // غيري الكود من هنا كل مرة
 const buyModeBtn = document.getElementById('buyMode');
 const sellModeBtn = document.getElementById('sellMode');
 const goldForm = document.getElementById('goldForm');
@@ -39,11 +39,13 @@ function updatePaymentVisibility() {
 window.addEventListener('load', updatePaymentVisibility);
 window.matchMedia('(display-mode: standalone)').addListener(updatePaymentVisibility);
 
-// Re-check visibility when the page becomes visible (in case of app installation)
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
         updatePaymentVisibility();
-        if (applyDiscountBtn) { // new
+    }
+});
+
+if (applyDiscountBtn) {
     applyDiscountBtn.addEventListener('click', function () {
         const enteredCode = discountInput.value.trim();
 
@@ -58,8 +60,6 @@ document.addEventListener('visibilitychange', () => {
         }
     });
 }
-    }
-});
 
 // Event Listeners - only add if elements exist (for calculator page)
 if (buyModeBtn && sellModeBtn && goldForm) {
