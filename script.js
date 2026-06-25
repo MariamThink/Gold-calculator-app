@@ -1,4 +1,5 @@
 // DOM Elements
+const DISCOUNT_CODE = "GOLD2026"; // غيري الكود من هنا كل مرة
 const buyModeBtn = document.getElementById('buyMode');
 const sellModeBtn = document.getElementById('sellMode');
 const goldForm = document.getElementById('goldForm');
@@ -8,6 +9,9 @@ const recommendation = document.getElementById('recommendation');
 const paymentSection = document.getElementById('payment-section');
 const pwaMessage = document.getElementById('pwa-message');
 const taxQuestion = document.getElementById('taxQuestion');
+const discountInput = document.getElementById('discountCode'); // new
+const applyDiscountBtn = document.getElementById('applyDiscount'); // new
+const discountMessage = document.getElementById('discountMessage'); // new
 
 let currentMode = null;
 
@@ -39,6 +43,21 @@ window.matchMedia('(display-mode: standalone)').addListener(updatePaymentVisibil
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden) {
         updatePaymentVisibility();
+        if (applyDiscountBtn) { // new
+    applyDiscountBtn.addEventListener('click', function () {
+        const enteredCode = discountInput.value.trim();
+
+        if (enteredCode === DISCOUNT_CODE) {
+            localStorage.setItem('goldCalculatorPaid', 'true');
+            discountMessage.textContent = "تم قبول الكود، جاري فتح التطبيق...";
+            discountMessage.style.color = "green";
+            window.location.href = "calculator.html";
+        } else {
+            discountMessage.textContent = "الكود غير صحيح";
+            discountMessage.style.color = "red";
+        }
+    });
+}
     }
 });
 
