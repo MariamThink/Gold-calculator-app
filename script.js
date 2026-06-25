@@ -7,6 +7,7 @@ const resultsDiv = document.getElementById('results');
 const resultDetails = document.getElementById('resultDetails');
 const recommendation = document.getElementById('recommendation');
 const paymentSection = document.getElementById('payment-section');
+const discountSection = document.getElementById('discount-section');
 const pwaMessage = document.getElementById('pwa-message');
 const taxQuestion = document.getElementById('taxQuestion');
 const discountInput = document.getElementById('discountCode'); // new
@@ -27,9 +28,11 @@ function updatePaymentVisibility() {
     if (paymentSection && pwaMessage) {
         if (isPWA()) {
             paymentSection.style.display = 'block';
+            discountSection.style.display = 'block';
             pwaMessage.style.display = 'none';
         } else {
             paymentSection.style.display = 'none';
+            discountSection.style.display = 'none';
             pwaMessage.style.display = 'block';
         }
     }
