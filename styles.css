@@ -397,7 +397,7 @@ input {
     }
 }
 
-.discount-box {
+.discount-box { // new
     margin: 25px 0;
     padding: 18px;
     background: #fff8e6;
