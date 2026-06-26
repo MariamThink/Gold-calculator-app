@@ -1,5 +1,5 @@
 // DOM Elements
-const DISCOUNT_CODE = "Zainab2026"; // غيري الكود من هنا كل مرة
+const DISCOUNT_CODE = "Free2026"; // غيري الكود من هنا كل مرة
 const buyModeBtn = document.getElementById('buyMode');
 const sellModeBtn = document.getElementById('sellMode');
 const goldForm = document.getElementById('goldForm');
